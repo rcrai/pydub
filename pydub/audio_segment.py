@@ -680,11 +680,14 @@ class AudioSegment(object):
                 acodec = 'pcm_s%dle' % bits_per_sample
             if bits_per_sample == 4:
                 acodec = 'pcm_s%dle' % audio_streams[0]['bits_per_raw_sample']
+            if audio_streams[0].get('codec_name') == 'pcm_u8':
+                if not format:
+                    return cls.from_wav(file)
 
             conversion_command += ["-acodec", acodec]
         elif not format:
-            if is_format("mp3"):
-                return cls.from_file(file, 'mp3', parameters=parameters)
+            #if is_format("mp3"):
+            return cls.from_file(file, 'mp3', parameters=parameters)
 
         conversion_command += [
             "-vn",  # Drop any video streams if there are any
