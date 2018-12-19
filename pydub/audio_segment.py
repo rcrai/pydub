@@ -678,6 +678,8 @@ class AudioSegment(object):
                 acodec = 'pcm_s8'
             else:
                 acodec = 'pcm_s%dle' % bits_per_sample
+            if bits_per_sample == 4:
+                acodec = 'pcm_s%dle' % audio_streams[0]['bits_per_raw_sample']
 
             conversion_command += ["-acodec", acodec]
 
