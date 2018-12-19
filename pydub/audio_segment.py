@@ -682,6 +682,9 @@ class AudioSegment(object):
                 acodec = 'pcm_s%dle' % audio_streams[0]['bits_per_raw_sample']
 
             conversion_command += ["-acodec", acodec]
+        else:
+            if is_format("mp3"):
+                conversion_command += ["-f", "mp3"]
 
         conversion_command += [
             "-vn",  # Drop any video streams if there are any
