@@ -682,7 +682,7 @@ class AudioSegment(object):
                 acodec = 'pcm_s%dle' % audio_streams[0]['bits_per_raw_sample']
 
             conversion_command += ["-acodec", acodec]
-        else if not format:
+        elif not format:
             if is_format("mp3"):
                 return cls.from_file(file, 'mp3', parameters=parameters)
 
