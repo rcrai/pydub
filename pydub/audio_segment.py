@@ -684,7 +684,7 @@ class AudioSegment(object):
             conversion_command += ["-acodec", acodec]
         else:
             if is_format("mp3"):
-                conversion_command += ["-f", "mp3"]
+                return cls.from_file(file, 'mp3', parameters=parameters)
 
         conversion_command += [
             "-vn",  # Drop any video streams if there are any
