@@ -683,6 +683,8 @@ class AudioSegment(object):
             if audio_streams[0].get('codec_name') == 'pcm_u8':
                 if not format:
                     return cls.from_wav(file)
+            if audio_streams[0].get('codec_name') == 'adpcm_ima_wav':
+                acodec = 'adpcm_ima_wav'
 
             conversion_command += ["-acodec", acodec]
         elif not format:
