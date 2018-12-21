@@ -653,15 +653,6 @@ class AudioSegment(object):
             # force audio decoder
             conversion_command += ["-acodec", codec]
 
-        if filename:
-            conversion_command += ["-i", filename]
-            stdin_parameter = None
-            stdin_data = None
-        else:
-            conversion_command += ["-i", "-"]
-            stdin_parameter = subprocess.PIPE
-            stdin_data = file.read()
-
         info = mediainfo_json(orig_file)
         if info:
             audio_streams = [x for x in info['streams']
@@ -688,6 +679,15 @@ class AudioSegment(object):
         elif not format:
             #if is_format("mp3"):
             return cls.from_file(file, 'mp3', parameters=parameters)
+
+        if filename:
+            conversion_command += ["-i", filename]
+            stdin_parameter = None
+            stdin_data = None
+        else:
+            conversion_command += ["-i", "-"]
+            stdin_parameter = subprocess.PIPE
+            stdin_data = file.read()
 
         conversion_command += [
             "-vn",  # Drop any video streams if there are any
